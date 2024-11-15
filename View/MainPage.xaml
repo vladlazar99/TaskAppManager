@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaskManagementApp.View.MainPage"
+             xmlns:model="clr-namespace:TaskManagementApp.Models"
+             xmlns:vm="clr-namespace:TaskManagementApp.ViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="Task Management">
+
+    <Grid Padding="10">
+        <RefreshView Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=LoadItemsCommand}" IsRefreshing="False" >
+
+            <!-- Task List -->
+            <CollectionView x:Name=" TaskList" ItemsSource="{Binding Tasks}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10"
+                              IsVisible="True"
+                              BindingContext="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=.}"
+                          BackgroundColor="WhiteSmoke"
+                          Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Task Description -->
+                            <Editor Text="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=NewTaskDescription, Mode=TwoWay}"                            
+                                    Placeholder="New Task"
+                                    PlaceholderColor="Gray"
+                                    IsReadOnly="True"
+                                    AutoSize="TextChanges"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="Center"
+                                    BackgroundColor="White"
+                                    TextColor="Black"
+                                    Grid.Column="0"/>
+
+                            <!-- Options Button -->
+                            <Button Text="..."
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=OnEditCommand}"
+                                CommandParameter="Edit Command"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center"
+                                WidthRequest="50"
+                                Grid.Column="1"
+                                   
+                                    />
+
+
+                            <!-- Popup with Save, Edit, Delete 
+                            <Grid IsVisible="True"
+                              BackgroundColor="LightGray"
+                              Padding="5"
+                              Grid.Row="2"
+                              Grid.Column="2"
+                              Grid.ColumnSpan="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Text="Save"
+                                    BackgroundColor="Green"
+                                    TextColor="White"
+                                    Margin="2"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TaskViewModel}}, Path=SaveTaskCommand}"
+                                    CommandParameter="{Binding .}"
+                                    Grid.Column="0" />
+                                <Button Text="Edit"
+                                    BackgroundColor="Gray"
+                                    TextColor="White"
+                                    Margin="2"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TaskViewModel}}, Path=EditTaskCommand}"
+                                    CommandParameter="{Binding .}"
+                                    Grid.Column="1" />
+                                <Button Text="Delete"
+                                    BackgroundColor="DarkRed"
+                                    TextColor="White"
+                                        Margin="2"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TaskViewModel}}, Path=DeleteTaskCommand}"
+                                    CommandParameter="{Binding .}"
+                                    Grid.Column="2" />
+                            </Grid> -->
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        <Frame 
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="EndAndExpand"
+            >
+            <Button Text="Create Task"
+             Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TaskViewModel}}, Path=CreateTaskCommand}"
+             CommandParameter="Create Task"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="End"
+             BackgroundColor="DodgerBlue"
+             TextColor="White"
+             CornerRadius="8"
+             WidthRequest="120"/>
+        </Frame>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaskManagementApp.View.TaskPage"
+             xmlns:model="clr-namespace:TaskManagementApp.Models"
+             xmlns:vm="clr-namespace:TaskManagementApp.ViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="TaskPage"
+             >
+    
+    <Grid Padding="10" RowDefinitions="*, Auto">
+        <Label 
+            Text="Task Edior"
+            VerticalOptions="Start" 
+            HorizontalOptions="Start"
+            Grid.Row="0"/>
+        <Editor Text=""
+                Placeholder="Write your task here!"
+                PlaceholderColor="Gray"
+                IsReadOnly="False"
+                AutoSize="TextChanges"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start"
+                BackgroundColor="White"
+                Grid.Row="0"
+                />
+
+        <Button Text="Save"
+                    Command="{Binding SaveTaskCommand}"
+                    CommandParameter="{Binding .}"
+                    HorizontalOptions="Start"
+                    BackgroundColor="White"
+                    TextColor="Green"
+                    CornerRadius="8"
+                    FontSize="Large"
+                    FontAttributes="Bold"
+                    WidthRequest="100"
+                    Grid.Row="2"/>
+
+        <Button Text="Delete"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TaskViewModel}}, Path=DeleteTaskCommand}"
+                    CommandParameter="{Binding .}"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    BackgroundColor="White"
+                    TextColor="Red"
+                    CornerRadius="8"
+                    FontSize="Large"
+                    FontAttributes="Bold"
+                    Grid.Row="2"
+                    WidthRequest="100"/>
+        <Button Text="Done"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TaskViewModel}}, Path=DeleteTaskCommand}"
+                CommandParameter="{Binding .}"
+                VerticalOptions="End"
+                HorizontalOptions="Center"
+                BackgroundColor="White"
+                TextColor="Blue"
+                CornerRadius="8"
+                FontSize="Large"
+                FontAttributes="Bold"
+                Grid.Row="2"
+                WidthRequest="100"/>
+
+
+
+    </Grid>
+</ContentPage>

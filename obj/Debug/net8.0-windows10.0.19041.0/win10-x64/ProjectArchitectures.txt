@@ -1,0 +1,1 @@
+C:\academy_project\TaskManagementApp\TaskManagementApp\TaskManagementApp.csproj;x64
